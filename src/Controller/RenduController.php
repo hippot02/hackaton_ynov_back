@@ -19,7 +19,7 @@ final class RenduController extends AbstractController
     public function index(RenduRepository $renduRepository): Response
     {
         return $this->render('rendu/index.html.twig', [
-            'rendus' => $renduRepository->findAll(),
+            'rendus' => $renduRepository->findActiveRendusOrderedByDateIndex(),
         ]);
     }
 

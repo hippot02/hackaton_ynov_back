@@ -7,9 +7,22 @@
         <h1 class="text-center mb-4">Admin rendu M1</h1>
 
         <div class="text-end mb-3">
-            <a href="{{path('app_api')}}" class="btn btn-primary">Visualiser API</a>
+            <a href="{{path('app_rendu_index')}}" class="btn btn-primary">Rafraichir</a>
+            <a href="{{ path('app_api') }}" class="btn btn-primary">Visualiser API</a>
             <a href="{{ path('app_rendu_new') }}" class="btn btn-primary">Créer Nouveau Rendu</a>
         </div>
+
+        <!-- Formulaire de filtre par groupe -->
+        <form id="filterForm" class="mb-3">
+            <div class="d-flex justify-content-end">
+                <select id="groupeFilter" class="form-select w-auto me-2">
+                    <option value="">Tous les groupes</option>
+                    <option value="M1Web">M1Web</option>
+                    <option value="M1Data">M1Data</option>
+                    <option value="M1Log">M1Log</option>
+                </select>
+            </div>
+        </form>
 
         <table class="table table-striped table-hover">
             <thead class="table-light">
@@ -22,9 +35,9 @@
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="renduTableBody">
             {% for rendu in rendus %}
-                <tr>
+                <tr data-groupe="{{ rendu.groupe }}">
                     <td>{{ rendu.titre }}</td>
                     <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
                     <td>
@@ -47,4 +60,20 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.getElementById('groupeFilter').addEventListener('change', function() {
+            const selectedGroupe = this.value;
+            const rows = document.querySelectorAll('#renduTableBody tr');
+
+            rows.forEach(row => {
+                const groupe = row.getAttribute('data-groupe');
+                if (selectedGroupe === '' || groupe === selectedGroupe) {
+                    row.style.display = ''; // Afficher la ligne
+                } else {
+                    row.style.display = 'none'; // Masquer la ligne
+                }
+            });
+        });
+    </script>
 {% endblock %}

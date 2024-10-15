@@ -26,6 +26,13 @@ class RenduRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findActiveRendusOrderedByDateIndex()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.dateDepot', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Rendu[] Returns an array of Rendu objects
