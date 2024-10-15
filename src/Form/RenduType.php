@@ -6,6 +6,7 @@ use App\Entity\Rendu;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RenduType extends AbstractType
 {
@@ -17,7 +18,16 @@ class RenduType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('lienDepot')
-            ->add('groupe')
+            ->add('groupe', ChoiceType::class, [
+                'choices' => [
+                    'M1Web' => 'M1Web',
+                    'M1Data' => 'M1Data',
+                    'M1Log' => 'M1Log',
+                ],
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => 'Choisir un groupe',
+            ])
             ->add('actif')
         ;
     }

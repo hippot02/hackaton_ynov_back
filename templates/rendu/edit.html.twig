@@ -3,11 +3,15 @@
 {% block title %}Edit Rendu{% endblock %}
 
 {% block body %}
-    <h1>Edit Rendu</h1>
+    <h1 class="mt-4 mb-4">Edit Rendu</h1>
 
-    {{ include('rendu/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="card">
+        <div class="card-body">
+            {{ include('rendu/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+    </div>
 
-    <a href="{{ path('app_rendu_index') }}">back to list</a>
+   
 
-    {{ include('rendu/_delete_form.html.twig') }}
+    
 {% endblock %}

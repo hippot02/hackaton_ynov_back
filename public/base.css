@@ -1,0 +1,15 @@
+
+.radio-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.radio-buttons input[type="radio"] {
+    width: auto; 
+    margin-right: 5px; 
+}
+
+.custom-radio {
+    width: auto;
+    cursor: pointer;
+}

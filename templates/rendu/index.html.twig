@@ -1,43 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rendu index{% endblock %}
+{% block title %}Admin rendu M1{% endblock %}
 
 {% block body %}
-    <h1>Rendu index</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Admin rendu M1</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>DateDepot</th>
-                <th>LienDepot</th>
-                <th>Groupe</th>
-                <th>Actif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for rendu in rendus %}
-            <tr>
-                <td>{{ rendu.id }}</td>
-                <td>{{ rendu.titre }}</td>
-                <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ rendu.lienDepot }}</td>
-                <td>{{ rendu.groupe }}</td>
-                <td>{{ rendu.actif ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_rendu_show', {'id': rendu.id}) }}">show</a>
-                    <a href="{{ path('app_rendu_edit', {'id': rendu.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="text-end mb-3">
+            <a href="{{path('app_api')}}" class="btn btn-primary">Visualiser API</a>
+            <a href="{{ path('app_rendu_new') }}" class="btn btn-primary">Créer Nouveau Rendu</a>
+        </div>
 
-    <a href="{{ path('app_rendu_new') }}">Create new</a>
+        <table class="table table-striped table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Date de Dépôt</th>
+                    <th scope="col">Lien de Dépôt</th>
+                    <th scope="col">Groupe</th>
+                    <th scope="col">Actif</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for rendu in rendus %}
+                <tr>
+                    <td>{{ rendu.titre }}</td>
+                    <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ rendu.lienDepot }}" target="_blank">{{ rendu.lienDepot }}</a>
+                    </td>
+                    <td>{{ rendu.groupe }}</td>
+                    <td class="{{ rendu.actif ? 'bg-success text-white' : 'bg-danger text-white' }}">
+                        {{ rendu.actif ? 'Oui' : 'Non' }}
+                    </td>                   
+                    <td class="text-center">
+                        <a href="{{ path('app_rendu_show', {'id': rendu.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                        <a href="{{ path('app_rendu_edit', {'id': rendu.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

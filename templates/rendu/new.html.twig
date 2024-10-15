@@ -3,9 +3,12 @@
 {% block title %}New Rendu{% endblock %}
 
 {% block body %}
-    <h1>Create new Rendu</h1>
+    <h1 class="mt-4 mb-4">Create New Rendu</h1>
 
-    {{ include('rendu/_form.html.twig') }}
+    <div class="card">
+        <div class="card-body">
+            {{ include('rendu/_form.html.twig') }}
+        </div>
+    </div>
 
-    <a href="{{ path('app_rendu_index') }}">back to list</a>
 {% endblock %}

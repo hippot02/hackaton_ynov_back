@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-#[Route('/rendu')]
+#[Route('/')]
 final class RenduController extends AbstractController
 {
     #[Route(name: 'app_rendu_index', methods: ['GET'])]

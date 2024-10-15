@@ -1,42 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rendu{% endblock %}
+{% block title %}Détails du Rendu{% endblock %}
 
 {% block body %}
-    <h1>Rendu</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Détails du Rendu</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ rendu.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ rendu.titre }}</td>
-            </tr>
-            <tr>
-                <th>DateDepot</th>
-                <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>LienDepot</th>
-                <td>{{ rendu.lienDepot }}</td>
-            </tr>
-            <tr>
-                <th>Groupe</th>
-                <td>{{ rendu.groupe }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ rendu.actif ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row">Titre</th>
+                    <td>{{ rendu.titre }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date de Dépôt</th>
+                    <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lien de Dépôt</th>
+                    <td>
+                        <a href="{{ rendu.lienDepot }}" target="_blank">{{ rendu.lienDepot }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Groupe</th>
+                    <td>{{ rendu.groupe }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Actif</th>
+                    <td class="{{ rendu.actif ? 'bg-success text-white' : 'bg-danger text-white' }}">
+                        {{ rendu.actif ? 'Oui' : 'Non' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_rendu_index') }}">back to list</a>
+        <div class="text-center mt-4">
+            <a href="{{ path('app_rendu_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            <a href="{{ path('app_rendu_edit', {'id': rendu.id}) }}" class="btn btn-warning">Modifier</a>
+        </div>
 
-    <a href="{{ path('app_rendu_edit', {'id': rendu.id}) }}">edit</a>
-
-    {{ include('rendu/_delete_form.html.twig') }}
+        {{ include('rendu/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
