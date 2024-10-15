@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rendu{% endblock %}
+
+{% block body %}
+    <h1>Rendu</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rendu.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ rendu.titre }}</td>
+            </tr>
+            <tr>
+                <th>DateDepot</th>
+                <td>{{ rendu.dateDepot ? rendu.dateDepot|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LienDepot</th>
+                <td>{{ rendu.lienDepot }}</td>
+            </tr>
+            <tr>
+                <th>Groupe</th>
+                <td>{{ rendu.groupe }}</td>
+            </tr>
+            <tr>
+                <th>Actif</th>
+                <td>{{ rendu.actif ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rendu_index') }}">back to list</a>
+
+    <a href="{{ path('app_rendu_edit', {'id': rendu.id}) }}">edit</a>
+
+    {{ include('rendu/_delete_form.html.twig') }}
+{% endblock %}
