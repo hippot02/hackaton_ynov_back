@@ -25,16 +25,14 @@ class ApiController extends AbstractController
                 $entityManager->persist($rendu);
             } else {
                 $data[] = [
-                    'titre' => $rendu->getTitre(),
-                    'datedepot' => $rendu->getDateDepot()->format(\DateTime::ATOM),
-                    'liendepot' => $rendu->getLienDepot(),
-                    'groupe' => $rendu->getGroupe(),
+                    'title' => $rendu->getTitre(),
+                    'endDate' => $rendu->getDateDepot()->format(\DateTime::ATOM),
+                    'repoLink' => $rendu->getLienDepot(),
+                    'group' => $rendu->getGroupe(),
                 ];
             }
         }
-
         $entityManager->flush();
-
         return $this->json($data);
     }
 }
